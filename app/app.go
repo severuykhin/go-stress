@@ -32,18 +32,13 @@ func (a *app) RunStage(stage structs.Stage) {
 
 func (a *app) renderStageInfo(stage structs.Stage) {
 	a.infoRenderer.Render(
-		interfaces.WithHeader(stage.GetFields()),
-		interfaces.WithData([][]string{
-			stage.GetValues(),
-		}),
+		structs.InfoData{
+			Header: stage.GetFields(),
+			Data: [][]string{
+				stage.GetValues(),
+			},
+		},
 	)
-
-	a.infoRenderer.Render(interfaces.WithData([][]string{
-		{"test1", "value"},
-		{"test1", "value"},
-		{"test1", "value"},
-		{"test1", "value"},
-	}))
 }
 
 // func (a *app) Run_OLD() {

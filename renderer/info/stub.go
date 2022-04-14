@@ -1,6 +1,8 @@
 package info
 
-import "github.com/severuykhin/go-stress/interfaces"
+import (
+	"github.com/severuykhin/go-stress/structs"
+)
 
 type StubInfoRenderer struct {
 }
@@ -9,6 +11,6 @@ func NewStubResultRenderer() *StubInfoRenderer {
 	return &StubInfoRenderer{}
 }
 
-func (srr *StubInfoRenderer) Render(optFunc ...interfaces.InfoOptFunc) {
+func (srr *StubInfoRenderer) Render(infoData structs.InfoData) {
 	// do nothing
 }

@@ -1,6 +1,6 @@
 package structs
 
-type InfoOptions struct {
+type InfoData struct {
 	Header []string
 	Data   [][]string
 }
