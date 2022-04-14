@@ -1,13 +1,14 @@
 package main
 
 import (
-	"flag"
 	"log"
+	"os"
 
 	"github.com/severuykhin/go-stress/app"
 	"github.com/severuykhin/go-stress/client"
+	"github.com/severuykhin/go-stress/parser"
+	"github.com/severuykhin/go-stress/renderer/info"
 	"github.com/severuykhin/go-stress/renderer/progress"
-	"github.com/severuykhin/go-stress/renderer/result"
 )
 
 /*
@@ -24,34 +25,34 @@ Command line arguments
 
 func main() {
 
-	var config app.Config
+	parser, err := parser.CreateFrom(os.Args[1:])
 
-	if err := ParseCommandLineArguments(&config); err != nil {
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	stages, err := parser.Parse()
+
+	if err != nil {
 		log.Fatal(err)
 	}
 
 	progressRenderer := progress.NewStdOutTimeBarProgressRenderer()
-	resultRederer := result.NewTableViewResultRenderer()
+	infoRederer := info.NewTableViewInfoRenderer()
 	appClient := client.NewHttpClient()
-	application := app.New(config, appClient, progressRenderer, resultRederer)
+	application := app.New(appClient, progressRenderer, infoRederer)
 
-	application.Run()
+	application.Run(stages)
 
 }
 
-func ParseCommandLineArguments(config *app.Config) error {
-	clients := flag.Int("c", 1, "# of virtual clients")
-	method := flag.String("m", "GET", "request method")
-	url := flag.String("u", "", "request method")
-	duration := flag.Int("d", 1, "stress test duration in seconds")
-	timeout := flag.Int("t", 1000, "request timeout in milliseconds")
-	flag.Parse()
+// func GetConfigParser() (interfaces.ConfigParserInterface, error) {
 
-	config.Clients = *clients
-	config.Duration = *duration
-	config.Url = *url
-	config.Method = *method
-	config.Timeout = *timeout
+// 	isFileSource := parser.IsFlagPassed("-f", os.Args[1:])
 
-	return nil
-}
+// 	if isFileSource {
+// 		return parser.NewJsonParser(os.Args[1:]), nil
+// 	} else {
+// 		return parser.NewCliParser(os.Args[1:]), nil
+// 	}
+// }

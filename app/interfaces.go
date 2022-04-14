@@ -18,11 +18,3 @@ type Client interface {
 type ProgressRenderer interface {
 	Run(ctx context.Context, target int)
 }
-
-/*
-	Отображение результатов тестирования
-	Агрегированные результаты тестирования предоставляются в виде нескольких массиво строк
-*/
-type ResultRenderer interface {
-	Render(results [][]string)
-}
