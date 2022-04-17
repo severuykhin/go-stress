@@ -121,7 +121,7 @@ func (dc *dataCollection) getPMetrics(point int) time.Duration {
 	pointReal := float32(point)
 	percent := float32(dc.totalRequestCount) / float32(100)
 	for index, value := range dc.latencies {
-		currentPoint := float32(index) / percent
+		currentPoint := float32(index+1) / percent
 		if currentPoint > pointReal {
 			res = value
 			break

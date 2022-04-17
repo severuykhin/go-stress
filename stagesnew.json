@@ -3,7 +3,7 @@
         "clients":  5,
         "url": "http://api.app.loc/v1",
         "method": "GET",
-        "duration": 3,
-        "timeout": 10
+        "duration": 2,
+        "timeout": 120
     }
 ]
