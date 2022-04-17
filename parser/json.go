@@ -1,6 +1,10 @@
 package parser
 
 import (
+	"encoding/json"
+	"fmt"
+	"os"
+
 	"github.com/severuykhin/go-stress/structs"
 )
 
@@ -15,5 +19,26 @@ func NewJsonParser(fileName string) *jsonParser {
 }
 
 func (jp *jsonParser) Parse() ([]structs.Stage, error) {
-	return []structs.Stage{}, nil
+
+	data, err := os.ReadFile(jp.fileName)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var stages []structs.Stage
+
+	err = json.Unmarshal(data, &stages)
+
+	if err != nil {
+		return nil, err
+	}
+
+	for i, stage := range stages {
+		if err := stage.IsValid(); err != nil {
+			return nil, fmt.Errorf("error: stage %d: %s", i, err)
+		}
+	}
+
+	return stages, nil
 }

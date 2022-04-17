@@ -6,6 +6,7 @@ import (
 
 	"github.com/severuykhin/go-stress/app"
 	"github.com/severuykhin/go-stress/client"
+	"github.com/severuykhin/go-stress/collection"
 	"github.com/severuykhin/go-stress/parser"
 	"github.com/severuykhin/go-stress/renderer/info"
 	"github.com/severuykhin/go-stress/renderer/progress"
@@ -40,19 +41,9 @@ func main() {
 	progressRenderer := progress.NewStdOutTimeBarProgressRenderer()
 	infoRederer := info.NewTableViewInfoRenderer()
 	appClient := client.NewHttpClient()
-	application := app.New(appClient, progressRenderer, infoRederer)
+	dataCollectionFactory := collection.New()
+	application := app.New(appClient, progressRenderer, infoRederer, dataCollectionFactory)
 
 	application.Run(stages)
 
 }
-
-// func GetConfigParser() (interfaces.ConfigParserInterface, error) {
-
-// 	isFileSource := parser.IsFlagPassed("-f", os.Args[1:])
-
-// 	if isFileSource {
-// 		return parser.NewJsonParser(os.Args[1:]), nil
-// 	} else {
-// 		return parser.NewCliParser(os.Args[1:]), nil
-// 	}
-// }

@@ -45,7 +45,7 @@ func (sotd *StdOutTimeBarProgressRenderer) buildProgressString(target, current i
 	str := ""
 	// str += start
 
-	for i := 0; i < complete-1; i++ {
+	for i := 0; i < complete; i++ {
 		str += "="
 	}
 

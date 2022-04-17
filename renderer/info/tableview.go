@@ -1,6 +1,7 @@
 package info
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/olekukonko/tablewriter"
@@ -29,5 +30,6 @@ func (tvrr *tableViewInfoRenderer) Render(infoData structs.InfoData) {
 		}
 	}
 
+	fmt.Println()
 	table.Render()
 }
