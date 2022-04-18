@@ -23,7 +23,6 @@ func (sotb *StdOutTimeBarProgressRenderer) Run(ctx context.Context, target int) 
 		stepStart := time.Now()
 		select {
 		case <-ctx.Done():
-			time.Sleep(time.Second)
 			return
 		default:
 			time.Sleep(progressDurationStep)
