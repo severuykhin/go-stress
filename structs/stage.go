@@ -33,6 +33,16 @@ func (s *Stage) GetValues() []string {
 	}
 }
 
+func (s *Stage) GetValuesFormatted() []string {
+	return []string{
+		s.Url,
+		s.Method,
+		strconv.Itoa(s.Duration) + "s",
+		strconv.Itoa(s.Timeout) + "ms",
+		strconv.Itoa(s.Clients) + "vc",
+	}
+}
+
 func (s *Stage) IsValid() error {
 	if s.Url == "" {
 		return fmt.Errorf("url must be not empty")

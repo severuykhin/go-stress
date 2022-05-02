@@ -41,7 +41,7 @@ func (a *app) RunStage(stage structs.Stage) {
 		structs.InfoData{
 			Header: stage.GetFields(),
 			Data: [][]string{
-				stage.GetValues(),
+				stage.GetValuesFormatted(),
 			},
 		},
 	)
